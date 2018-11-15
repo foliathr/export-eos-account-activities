@@ -49,7 +49,7 @@ self.onmessage = function(msg) {
               if (item.Data) {
                 item.Data += "\n\r";
               }
-              item.Data += key + ' : ' + loopItem.act.data[key].replace(/\"/g, '\'')
+              item.Data += key + ' : ' + loopItem.act.data[key].replace(/\"/g, '""')
             }
           }
           filterData.push(item);          
