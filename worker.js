@@ -32,24 +32,29 @@ self.onmessage = function(msg) {
     if (Http.readyState == 4 && Http.status == 200) {
       var data = JSON.parse(Http.responseText)
       var filterData = [];
+      var pushedTxs = [];
       data.actions.forEach(function(loopItem) {
-        var createAt = new Date(loopItem.createdAt)
-        var item = {
-          "Transaction ID": loopItem.trx_id,
-          "Created At": createAt.toGMTString()
-        };
-        item.Contract = loopItem.act.account;
-        item.Name = loopItem.act.name;
-        item.Data = '';
-        for (var key in loopItem.act.data) {
-          if (typeof(loopItem.act.data[key]) == "string") {
-            if (item.Data) {
-              item.Data += "\n\r";
+        if (pushedTxs.indexOf( loopItem.trx_id ) == -1){
+          pushedTxs.push( loopItem.trx_id )
+          var createAt = new Date(loopItem.createdAt)
+          var item = {
+            "Transaction ID": loopItem.trx_id,
+            "Created At": createAt.toGMTString()
+          };
+          item.Contract = loopItem.act.account;
+          item.Name = loopItem.act.name;
+          item.Data = '';
+          for (var key in loopItem.act.data) {
+            if (typeof(loopItem.act.data[key]) == "string") {
+              if (item.Data) {
+                item.Data += "\n\r";
+              }
+              item.Data += key + ' : ' + loopItem.act.data[key].replace(/\"/g, '\'')
             }
-            item.Data += key + ' : ' + loopItem.act.data[key].replace(/\"/g, '\'')
           }
+          filterData.push(item);          
         }
-        filterData.push(item);
+
       });
       postMessage(convertArrayOfObjectsToCSV({
         data: filterData
