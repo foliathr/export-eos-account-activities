@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Export EOS Account TO CSV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="main_w.js"></script>
+</head>
+
+<body>
+  <div class="container" style="margin-top:30px;">
+    <div style="text-align: center">
+      <h3>Export your EOS activity to CSV</h3>
+    </div>
+
+    <hr />
+    <form class="form-horizontal" onSubmit="return exportAccount()">
+      <div class="form-group">
+        <label for="numbertransactions" class="col-sm-2 control-label">Number Transactions</label>
+        <div class="col-sm-10">
+          <input type="number" value="200" name="numbertransactions" id="numbertransactions" required placeholder="Number Transactions" class="form-control" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">EOS Account</label>
+        <div class="col-sm-10">
+          <input type="text" name="eosaccount" id="eosaccount" required placeholder="Enter EOS Account" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="submit" value="Export" class="btn btn-primary" />
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>
